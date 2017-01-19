@@ -1,0 +1,8 @@
+[submodule "Xamarin/MusicBrainz"]
+	path = Xamarin/MusicBrainz
+	url = https://github.com/toolboc/MusicBrainz.git
+	branch = Searchler
+[submodule "Xamarin/YoutubeExtractor"]
+	path = Xamarin/YoutubeExtractor
+	url = https://github.com/toolboc/YoutubeExtractor.git
+	branch = Searchler
