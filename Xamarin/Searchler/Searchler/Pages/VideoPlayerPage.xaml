@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:me="clr-namespace:Searchler.MarkupExtensions;assembly=Searchler"
+             xmlns:o="clr-namespace:Octane.Xam.VideoPlayer;assembly=Octane.Xam.VideoPlayer"
+             x:Class="Searchler.Pages.VideoPlayerPage">
+
+    <Grid BindingContext="{x:Reference VideoPlayer}" HeightRequest="1000" VerticalOptions="FillAndExpand" >
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="2*" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+
+      <StackLayout BindingContext="{x:Reference VideoPlayer}" HeightRequest="1000" VerticalOptions="FillAndExpand" Spacing="0">
+        <o:VideoPlayer
+        x:Name="VideoPlayer"
+        DisplayControls="True"
+        FillMode="ResizeAspect"
+        AutoPlay="True"
+        PlayerStateChanged="VideoPlayer_OnPlayerStateChanged" />
+
+        <Grid BackgroundColor="#EEE" ColumnSpacing="0" Padding="10">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+
+          <Label Text="{Binding CurrentTime, StringFormat=\{0:mm\\:ss\}}" FontSize="24" Grid.Row="0" Grid.Column="0" />
+          <Label Text="Time" FontAttributes="Bold" FontSize="10" TextColor="#666" Grid.Row="1" Grid.Column="0" />
+
+          <Label Text="{Binding State}" FontSize="24" Grid.Row="0" Grid.Column="1" />
+          <Label Text="Current State" FontAttributes="Bold" FontSize="10" TextColor="#666" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+      </StackLayout>
+      
+      <ListView Grid.Row="1" x:Name="Playlist" HasUnevenRows="True" ItemSelected="Playlist_OnItemSelected">
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ImageCell ImageSource="{Binding ThumbnailPath}" Text="{Binding Title}" Detail="{Binding Author}" TextColor="Black" DetailColor="Gray" />
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+    </Grid>
+
+</ContentPage>

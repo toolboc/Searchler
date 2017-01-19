@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<component format="1" id="video-player">
+  <name>Video Player</name>
+  <publisher>Adam Fisher</publisher>
+  <publisher-url>http://www.adams.life</publisher-url>
+  <version>1.2.1</version>
+  <summary>A Xamarin Forms control to render the native video player on every platform.</summary>
+  <screenshots>
+    <img src="screenshots/screenshot1.png" title="screenshot1" />
+    <img src="screenshots/screenshot2.png" title="screenshot2" />
+    <img src="screenshots/screenshot3.png" title="screenshot3" />
+    <img src="screenshots/screenshot4.png" title="screenshot4" />
+    <img src="screenshots/screenshot5.png" title="screenshot5" />
+  </screenshots>
+  <samples>
+    <sample id="ChillPlayer">
+      <name>Chill Player</name>
+      <summary>Chill Player</summary>
+    </sample>
+  </samples>
+</component>

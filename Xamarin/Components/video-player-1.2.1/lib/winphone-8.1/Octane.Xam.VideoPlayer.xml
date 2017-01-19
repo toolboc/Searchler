@@ -1,0 +1,1641 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Octane.Xam.VideoPlayer</name>
+    </assembly>
+    <members>
+        <member name="T:Octane.Xam.VideoPlayer.Constants.LicenseType">
+            <summary>
+            Indicates the license type of the video player.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Constants.PlayerState">
+            <summary>
+            Represents the current state of the video player.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Idle">
+            <summary>
+            The idle state is the default state of a newly created video player.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Initialized">
+            <summary>
+            The video player enters this state when a video source has been specified for playback.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Prepared">
+            <summary>
+            The video player is ready to begin playback.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Playing">
+            <summary>
+            Video playback is currently active.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Paused">
+            <summary>
+            Video playback is paused.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Completed">
+            <summary>
+            Video playback is complete.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.PlayerState.Error">
+            <summary>
+            The video player has experienced an error.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Constants.FillMode">
+            <summary>
+            Define how the video is displayed within a layer’s bounds.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.FillMode.Resize">
+            <summary>
+            The video stretches to fill the layer’s bounds.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.FillMode.ResizeAspect">
+            <summary>
+            The video’s aspect ratio is preserved and fits the video within the layer’s bounds.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Constants.FillMode.ResizeAspectFill">
+            <summary>
+            The video’s aspect ratio is preserved and fills the layer’s bounds.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.BaseClasses.SingletonBase`1">
+            <summary>
+            Singleton Base Class.
+            Allows the use of a single Static Instance on Demand.
+            </summary>
+            <typeparam name="T">The type of object to make a singleton.</typeparam>
+            <typeparam name="TI">The interface of the Type in T. </typeparam>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.BaseClasses.SingletonBase`1._ConcurrencyLock">
+            <summary>
+            Concurrency Locking Object.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.BaseClasses.SingletonBase`1._Current">
+            <summary>
+            Holds the current active singleton object.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.BaseClasses.SingletonBase`1.Current">
+            <summary>
+            Gets or sets the Singleton Current Static Property.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Diagnostics.ILogger">
+            <summary>
+            A native platform logging implementation.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.ILogger.Info(System.String)">
+            <summary>
+            Informations the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.ILogger.Warn(System.String)">
+            <summary>
+            Warns the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.ILogger.Error(System.String)">
+            <summary>
+            Errors the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.ILogger.Error(System.Exception)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.ILogger.Error(System.Exception,System.String)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Diagnostics.Log">
+            <summary>
+            A cross-platform log implementation.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.Log.Info(System.String)">
+            <summary>
+            Informations the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.Log.Warn(System.String)">
+            <summary>
+            Warns the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.Log.Error(System.String)">
+            <summary>
+            Errors the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.Log.Error(System.Exception)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Diagnostics.Log.Error(System.Exception,System.String)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs">
+            <summary>
+            Represents video player event data.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs.CurrentTime">
+            <summary>
+            The current position in the playback timeline.
+            </summary>
+            <value>
+            The player's current position.
+            </value>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs.Duration">
+            <summary>
+            Length of the video file.
+            </summary>
+            <value>
+            The duration.
+            </value>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs.Rate">
+            <summary>
+            The current rate of playback. Examples:
+            </summary>
+            <remarks>
+            <para>
+            Some media files can support reverse-playback via negative rates.
+            0.0 = Stopped
+            0.5 = Playing at half speed (slow motion).
+            1.0 = Normal playback.
+            1.0+ = Fast playback.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> class.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs.#ctor(System.TimeSpan,System.TimeSpan,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> class.
+            </summary>
+            <param name="currentTime">The current time.</param>
+            <param name="duration">The duration.</param>
+            <param name="rate">The rate of playback.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs">
+            <summary>
+            Contains error information about the video player.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs.Message">
+            <summary>
+            The reason the error occurred.
+            </summary>
+            <value>
+            The label.
+            </value>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs.ErrorObject">
+            <summary>
+            The native exception object.
+            </summary>
+            <value>
+            The error.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="errorObject">The exception.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs.#ctor(System.TimeSpan,System.TimeSpan,System.Single,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> class.
+            </summary>
+            <param name="currentTime">The current time.</param>
+            <param name="duration">The duration.</param>
+            <param name="rate">The rate of playback.</param>
+            <param name="message">The message.</param>
+            <param name="errorObject">The error object.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs.#ctor(Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs,System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> class.
+            </summary>
+            <param name="videoPlayerEventArgs">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> instance containing the event data.</param>
+            <param name="message">The message.</param>
+            <param name="errorObject">The error object.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs">
+            <summary>
+            Contains information about video player state transitions.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs.CurrentState">
+            <summary>
+            The current state of the video player.
+            </summary>
+            <value>
+            The state of the video player.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs.#ctor(Octane.Xam.VideoPlayer.Constants.PlayerState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs"/> class.
+            </summary>
+            <param name="currentState">State of the current.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs.#ctor(System.TimeSpan,System.TimeSpan,System.Single,Octane.Xam.VideoPlayer.Constants.PlayerState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs" /> class.
+            </summary>
+            <param name="currentTime">The current time.</param>
+            <param name="duration">The duration.</param>
+            <param name="rate">The rate of playback.</param>
+            <param name="currentState">State of the current.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.ExtensionMethods.AssemblyExtensions">
+            <summary>
+            Assembly extension methods.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.AssemblyExtensions.ContainsManifestResource(System.Reflection.Assembly,System.String)">
+            <summary>
+            Determines whether the assembly contains the specified resource name.
+            </summary>
+            <param name="assembly">The assembly.</param>
+            <param name="resourceName">The name of the embedded resource.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.AssemblyExtensions.GetEmbeddedResourceStream(System.Reflection.Assembly,System.String)">
+            <summary>
+            Attempts to find and return the given resource from within the specified assembly.
+            </summary>
+            <returns>The embedded resource stream.</returns>
+            <param name="assembly">The assembly.</param>
+            <param name="resourceFileName">Resource file name.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.AssemblyExtensions.GetEmbeddedResourceBytes(System.Reflection.Assembly,System.String)">
+            <summary>
+            Attempts to find and return the given resource from within the specified assembly.
+            </summary>
+            <returns>The embedded resource as a byte array.</returns>
+            <param name="assembly">Assembly.</param>
+            <param name="resourceFileName">Resource file name.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.AssemblyExtensions.GetEmbeddedResourceString(System.Reflection.Assembly,System.String)">
+            <summary>
+            Attempts to find and return the given resource from within the specified assembly.
+            </summary>
+            <returns>The embedded resource as a string.</returns>
+            <param name="assembly">Assembly.</param>
+            <param name="resourceFileName">Resource file name.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.ExtensionMethods.EventHandlerExtensions">
+            <summary>
+            EventHandler extension methods.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.EventHandlerExtensions.RaiseEvent(System.EventHandler,System.Object,System.EventArgs)">
+            <summary>
+            Raises the event.
+            </summary>
+            <param name="eventHandler">The event handler.</param>
+            <param name="sender">The event sender.</param>
+            <param name="eventArgs">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.ExtensionMethods.EventHandlerExtensions.RaiseEvent``1(System.EventHandler{``0},System.Object,``0)">
+            <summary>
+            Raises the event.
+            </summary>
+            <typeparam name="TEventArgs">The type of the event arguments.</typeparam>
+            <param name="eventHandler">The event handler.</param>
+            <param name="sender">The event sender.</param>
+            <param name="eventArgs">The <see cref="T:System.EventArgs" /> instance containing the event data.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.FileVideoSource">
+            <summary>
+            An <see cref="T:Octane.Xam.VideoPlayer.VideoSource"/> that reads a video from a file.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.FileVideoSource.FileProperty">
+            <summary>
+            Backing store for the <see cref="P:Octane.Xam.VideoPlayer.FileVideoSource.File"/> property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.FileVideoSource.File">
+            <summary>
+            Gets or sets the file from which this <see cref="T:Octane.Xam.VideoPlayer.FileVideoSource"/> will load a video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSource.op_Implicit(System.String)~Octane.Xam.VideoPlayer.FileVideoSource">
+            <summary>
+            Allows implicit casting from a string.
+            </summary>
+            <param name="file">The file.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSource.op_Implicit(Octane.Xam.VideoPlayer.FileVideoSource)~System.String">
+            <summary>
+            Allows implicit casting to a string.
+            </summary>
+            <param name="file">The file.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSource.OnPropertyChanged(System.String)">
+            <summary>
+            Method that is called when the property that is specified by <paramref name="propertyName" /> is changed.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSource.Cancel">
+            <summary>
+            Request a cancel of the VideoSource loading.
+            </summary>
+            <remarks>
+            Overriden for FileVideoSource. FileVideoSource are not cancellable, so this will always return
+            a completed Task with <see langword="false"/> as Result.
+            </remarks>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSource.Equals(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Determines if two video sources are equivalent.
+            </summary>
+            <param name="other">The other video source.</param>
+            <returns>
+            True if the video sources are equal, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.FileVideoSourceConverter">
+            <summary>
+            Converts a source type into a FileVideoSource.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.FileVideoSourceConverter.ConvertFromInvariantString(System.String)">
+            <summary>
+            When overriden in a derived class, converts XAML extension syntax into instances of various <see cref="N:Xamarin.Forms" /> types.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Interfaces.IPlatformFeatures.PackageName">
+            <summary>
+            Gets the name of the package.
+            </summary>
+            <value>
+            The name of the package.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IPlatformFeatures.HashSha1(System.String)">
+            <summary>
+            Hashes the specified value using SHA-1.
+            </summary>
+            <param name="value">The value to hash.</param>
+            <returns>
+            A base-64 encoded SHA-1 hash.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IPlatformFeatures.Exit">
+            <summary>
+            Exits the mobile application.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer">
+            <summary>
+            Provides a common set of properties and operations for platform specific video player renderers.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.Play">
+            <summary>
+            Plays the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.CanPlay">
+            <summary>
+            Determines if the video player instance can play.
+            </summary>
+              <c>true</c> if this instance can play; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.Pause">
+            <summary>
+            Pauses the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.CanPause">
+            <summary>
+            Determines if the video player instance can pause.
+            </summary>
+              <c>true</c> if this instance can pause; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.Stop">
+            <summary>
+            Stops the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.CanStop">
+            <summary>
+            Determines if the video player instance can stop.
+            </summary>
+              <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.Seek(System.Int32)">
+            <summary>
+            Seeks a specific number of seconds into the playback stream.
+            </summary>
+            <param name="seekTime">The seek time.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoPlayerRenderer.CanSeek(System.Int32)">
+            <summary>
+            Determines if the video player instance can seek.
+            </summary>
+            <param name="time">The time in seconds.</param>
+            <returns></returns>
+            <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Interfaces.IVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.PreserveAttribute">
+            <summary>
+            Preserves a member during Xamarin linker passes.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could be <c>null</c> sometimes,
+            so the check for <c>null</c> is necessary before its usage.
+            </summary>
+            <example><code>
+            [CanBeNull] public object Test() { return null; }
+            public void UseTest() {
+              var p = Test();
+              var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.NotNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could never be <c>null</c>.
+            </summary>
+            <example><code>
+            [NotNull] public object Foo() {
+              return null; // Warning: Possible 'null' assignment
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.ItemNotNullAttribute">
+            <summary>
+            Indicates that collection or enumerable value does not contain null elements.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.ItemCanBeNullAttribute">
+            <summary>
+            Indicates that collection or enumerable value can contain null elements.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.StringFormatMethodAttribute">
+            <summary>
+            Indicates that the marked method builds string by format pattern and (optional) arguments.
+            Parameter, which contains format string, should be given in constructor. The format string
+            should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/>-like form.
+            </summary>
+            <example><code>
+            [StringFormatMethod("message")]
+            public void ShowError(string message, params object[] args) { /* do something */ }
+            public void Foo() {
+              ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+            }
+            </code></example>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <param name="formatParameterName">
+            Specifies which parameter of an annotated method should be treated as format-string
+            </param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.ValueProviderAttribute">
+            <summary>
+            For a parameter that is expected to be one of the limited set of values.
+            Specify fields of which type should be used as values for this parameter.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be string literal and match one
+            of the parameters of the caller function. For example, ReSharper annotates
+            the parameter of <see cref="T:System.ArgumentNullException"/>.
+            </summary>
+            <example><code>
+            public void Foo(string param) {
+              if (param == null)
+                throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.NotifyPropertyChangedInvocatorAttribute">
+             <summary>
+             Indicates that the method is contained in a type that implements
+             <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
+             is used to notify that some property value changed.
+             </summary>
+             <remarks>
+             The method should be non-static and conform to one of the supported signatures:
+             <list>
+             <item><c>NotifyChanged(string)</c></item>
+             <item><c>NotifyChanged(params string[])</c></item>
+             <item><c>NotifyChanged{T}(Expression{Func{T}})</c></item>
+             <item><c>NotifyChanged{T,U}(Expression{Func{T,U}})</c></item>
+             <item><c>SetProperty{T}(ref T, T, string)</c></item>
+             </list>
+             </remarks>
+             <example><code>
+             public class Foo : INotifyPropertyChanged {
+               public event PropertyChangedEventHandler PropertyChanged;
+               [NotifyPropertyChangedInvocator]
+               protected virtual void NotifyChanged(string propertyName) { ... }
+            
+               private string _name;
+               public string Name {
+                 get { return _name; }
+                 set { _name = value; NotifyChanged("LastName"); /* Warning */ }
+               }
+             }
+             </code>
+             Examples of generated notifications:
+             <list>
+             <item><c>NotifyChanged("Property")</c></item>
+             <item><c>NotifyChanged(() =&gt; Property)</c></item>
+             <item><c>NotifyChanged((VM x) =&gt; x.Property)</c></item>
+             <item><c>SetProperty(ref myField, value, "Property")</c></item>
+             </list>
+             </example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.ContractAnnotationAttribute">
+            <summary>
+            Describes dependency between method input and output.
+            </summary>
+            <syntax>
+            <p>Function Definition Table syntax:</p>
+            <list>
+            <item>FDT      ::= FDTRow [;FDTRow]*</item>
+            <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
+            <item>Input    ::= ParameterName: Value [, Input]*</item>
+            <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
+            <item>Value    ::= true | false | null | notnull | canbenull</item>
+            </list>
+            If method has single input parameter, it's name could be omitted.<br/>
+            Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same)
+            for method output means that the methos doesn't return normally.<br/>
+            <c>canbenull</c> annotation is only applicable for output parameters.<br/>
+            You can use multiple <c>[ContractAnnotation]</c> for each FDT row,
+            or use single attribute with rows separated by semicolon.<br/>
+            </syntax>
+            <examples><list>
+            <item><code>
+            [ContractAnnotation("=> halt")]
+            public void TerminationMethod()
+            </code></item>
+            <item><code>
+            [ContractAnnotation("halt &lt;= condition: false")]
+            public void Assert(bool condition, string text) // regular assertion method
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null => true")]
+            public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
+            </code></item>
+            <item><code>
+            // A method that returns null if the parameter is null,
+            // and not null if the parameter is not null
+            [ContractAnnotation("null => null; notnull => notnull")]
+            public object Transform(object data) 
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null=>false; =>true,result:notnull; =>false, result:null")]
+            public bool TryParse(string s, out Person result)
+            </code></item>
+            </list></examples>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            Indicates that marked element should be localized or not.
+            </summary>
+            <example><code>
+            [LocalizationRequiredAttribute(true)]
+            public class Foo {
+              private string str = "my string"; // Warning: Localizable string
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of the marked type (or its derivatives)
+            cannot be compared using '==' or '!=' operators and <c>Equals()</c>
+            should be used instead. However, using '==' or '!=' for comparison
+            with <c>null</c> is always permitted.
+            </summary>
+            <example><code>
+            [CannotApplyEqualityOperator]
+            class NoEquality { }
+            class UsesNoEquality {
+              public void Test() {
+                var ca1 = new NoEquality();
+                var ca2 = new NoEquality();
+                if (ca1 != null) { // OK
+                  bool condition = ca1 == ca2; // Warning
+                }
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to a target attribute, specifies a requirement for any type marked
+            with the target attribute to implement or inherit specific type or types.
+            </summary>
+            <example><code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            public class ComponentAttribute : Attribute { }
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            public class MyComponent : IComponent { }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
+            as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseKindFlags.Access">
+            <summary>Only entity marked with attribute considered used.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>Indicates implicit assignment to a member.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type with fixed constructor signature.
+            That means any unused constructor parameters won't be reported as such.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature">
+            <summary>Indicates implicit instantiation of a type.</summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked
+            with <see cref="T:Octane.Xam.VideoPlayer.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:Octane.Xam.VideoPlayer.Annotations.UsedImplicitlyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>Members of entity marked with attribute are considered used.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>Entity marked with attribute and all its members considered used.</summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.PublicAPIAttribute">
+            <summary>
+            This attribute is intended to mark publicly available API
+            which should not be removed and so is treated as used.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.InstantHandleAttribute">
+            <summary>
+            Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+            If the parameter is a delegate, indicates that delegate is executed while the method is executed.
+            If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.PureAttribute">
+            <summary>
+            Indicates that a method does not make any observable state changes.
+            The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
+            </summary>
+            <example><code>
+            [Pure] private int Multiply(int x, int y) { return x * y; }
+            public void Foo() {
+              const int a = 2, b = 2;
+              Multiply(a, b); // Waring: Return value of pure method is not used
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.PathReferenceAttribute">
+            <summary>
+            Indicates that a parameter is a path to a file or a folder within a web project.
+            Path can be relative or absolute, starting from web root (~).
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.SourceTemplateAttribute">
+            <summary>
+            An extension method marked with this attribute is processed by ReSharper code completion
+            as a 'Source Template'. When extension method is completed over some expression, it's source code
+            is automatically expanded like a template at call site.
+            </summary>
+            <remarks>
+            Template method body can contain valid source code and/or special comments starting with '$'.
+            Text inside these comments is added as source code when the template is applied. Template parameters
+            can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
+            Use the <see cref="T:Octane.Xam.VideoPlayer.Annotations.MacroAttribute"/> attribute to specify macros for parameters.
+            </remarks>
+            <example>
+            In this example, the 'forEach' method is a source template available over all values
+            of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
+            <code>
+            [SourceTemplate]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
+              foreach (var x in xs) {
+                 //$ $END$
+              }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.MacroAttribute">
+            <summary>
+            Allows specifying a macro for a parameter of a <see cref="T:Octane.Xam.VideoPlayer.Annotations.SourceTemplateAttribute">source template</see>.
+            </summary>
+            <remarks>
+            You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
+            is defined in the <see cref="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Expression"/> property. When applied on a method, the target
+            template parameter is defined in the <see cref="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Target"/> property. To apply the macro silently
+            for the parameter, set the <see cref="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Editable"/> property value = -1.
+            </remarks>
+            <example>
+            Applying the attribute on a source template method:
+            <code>
+            [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
+              foreach (var item in collection) {
+                //$ $END$
+              }
+            }
+            </code>
+            Applying the attribute on a template method parameter:
+            <code>
+            [SourceTemplate]
+            public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
+              /*$ var $x$Id = "$newguid$" + x.ToString();
+              x.DoSomething($x$Id); */
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Expression">
+            <summary>
+            Allows specifying a macro that will be executed for a <see cref="T:Octane.Xam.VideoPlayer.Annotations.SourceTemplateAttribute">source template</see>
+            parameter when the template is expanded.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Editable">
+            <summary>
+            Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+            </summary>
+            <remarks>
+            If the target parameter is used several times in the template, only one occurrence becomes editable;
+            other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
+            use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+            </remarks>>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Annotations.MacroAttribute.Target">
+            <summary>
+            Identifies the target parameter of a <see cref="T:Octane.Xam.VideoPlayer.Annotations.SourceTemplateAttribute">source template</see> if the
+            <see cref="T:Octane.Xam.VideoPlayer.Annotations.MacroAttribute"/> is applied on a template method.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcActionAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC action. If applied to a method, the MVC action name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcAreaAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcControllerAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+            an MVC controller. If applied to a method, the MVC controller name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcMasterAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcModelTypeAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcPartialViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+            partial view. If applied to a method, the MVC partial view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcSupressViewErrorAttribute">
+            <summary>
+            ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcDisplayTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcEditorTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
+            Use this attribute for custom wrappers similar to
+            <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view. If applied to a method, the MVC view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Controller.View(Object)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AspMvcActionSelectorAttribute">
+            <summary>
+            ASP.NET MVC attribute. When applied to a parameter of an attribute,
+            indicates that this parameter is an MVC action name.
+            </summary>
+            <example><code>
+            [ActionName("Foo")]
+            public ActionResult Login(string returnUrl) {
+              ViewBag.ReturnUrl = Url.Action("Foo"); // OK
+              return RedirectToAction("Bar"); // Error: Cannot resolve action
+            }
+            </code></example>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.RazorSectionAttribute">
+            <summary>
+            Razor attribute. Indicates that a parameter or a method is a Razor section.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.CollectionAccessAttribute">
+            <summary>
+            Indicates how method invocation affects content of the collection.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.CollectionAccessType.None">
+            <summary>Method does not use or modify content of the collection.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.CollectionAccessType.Read">
+            <summary>Method only reads content of the collection but does not modify it.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.CollectionAccessType.ModifyExistingContent">
+            <summary>Method can change content of the collection but does not add new elements.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.CollectionAccessType.UpdatedContent">
+            <summary>Method can add new elements to the collection.</summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts control flow if
+            one of the conditions is satisfied. To set the condition, mark one of the parameters with 
+            <see cref="T:Octane.Xam.VideoPlayer.Annotations.AssertionConditionAttribute"/> attribute.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. The method itself should be
+            marked by <see cref="T:Octane.Xam.VideoPlayer.Annotations.AssertionMethodAttribute"/> attribute. The mandatory argument of
+            the attribute is the assertion type.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisfies the condition,
+            then the execution continues. Otherwise, execution is assumed to be halted.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.AssertionConditionType.IS_TRUE">
+            <summary>Marked parameter should be evaluated to true.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.AssertionConditionType.IS_FALSE">
+            <summary>Marked parameter should be evaluated to false.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.AssertionConditionType.IS_NULL">
+            <summary>Marked parameter should be evaluated to null value.</summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Annotations.AssertionConditionType.IS_NOT_NULL">
+            <summary>Marked parameter should be evaluated to not null value.</summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.LinqTunnelAttribute">
+            <summary>
+            Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+            .Where). This annotation allows inference of [InstantHandle] annotation for parameters
+            of delegate type by analyzing LINQ method chains.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.NoEnumerationAttribute">
+            <summary>
+            Indicates that IEnumerable, passed as parameter, is not enumerated.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.RegexPatternAttribute">
+            <summary>
+            Indicates that parameter is regular expression pattern.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.XamlItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+            as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.XamlItemBindingOfItemsControlAttribute">
+            <summary>
+            XAML attibute. Indicates the property of some <c>BindingBase</c>-derived type, that
+            is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
+            enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+            </summary>
+            <remarks>
+            Property should have the tree ancestor of the <c>ItemsControl</c> type or
+            marked with the <see cref="T:Octane.Xam.VideoPlayer.Annotations.XamlItemsControlAttribute"/> attribute.
+            </remarks>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Annotations.NoReorder">
+            <summary>
+            Prevents the Member Reordering feature from tossing members of the marked class.
+            </summary>
+            <remarks>
+            The attribute must be mentioned in your member reordering patterns
+            </remarks>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.StreamVideoSource">
+            <summary>
+            <see cref="T:Octane.Xam.VideoPlayer.VideoSource"/> that loads a video from a <see cref="T:System.IO.Stream"/>.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.StreamVideoSource.Format">
+            <summary>
+            The video container format denoted by the file extension (e.g. Format = "mp4")
+            </summary>
+            <value>The containerformat.</value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.StreamVideoSource.StreamProperty">
+            <summary>
+            Backing store for the <see cref="P:Octane.Xam.VideoPlayer.StreamVideoSource.Stream"/> property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.StreamVideoSource.Stream">
+            <summary>
+            Gets or sets the delegate responsible for returning a <see cref="T:System.IO.Stream" /> for the video player.
+            </summary>
+            <value>
+            The stream.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.StreamVideoSource.OnPropertyChanged(System.String)">
+            <summary>
+            Method that is called when the property that is specified by <paramref name="propertyName" /> is changed.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.StreamVideoSource.GetStreamAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the stream asynchronously.
+            </summary>
+            <param name="userToken">The user token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.StreamVideoSource.Equals(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Determines if two video sources are equivalent.
+            </summary>
+            <param name="other">The other video source.</param>
+            <returns>
+            True if the video sources are equal, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.UriVideoSource">
+            <summary>
+            A VideoSource that loads a video from a URI.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.UriVideoSource.UriProperty">
+            <summary>
+            Backing store for the <see cref="P:Octane.Xam.VideoPlayer.UriVideoSource.Uri"/> property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.UriVideoSource.Uri">
+            <summary>
+            Gets or sets the URI for the video to get.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.UriVideoSource.OnPropertyChanged(System.String)">
+            <summary>
+            Method that is called when the property that is specified by <paramref name="propertyName" /> is changed.
+            </summary>
+            <param name="propertyName">Name of the property.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.UriVideoSource.Equals(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Determines if two video sources are equivalent.
+            </summary>
+            <param name="other">The other video source.</param>
+            <returns>
+            True if the video sources are equal, false otherwise.
+            </returns>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.VideoPlayer">
+            <summary>
+            A Xamarin Forms control that renders the native platform video player and reacts to touch events.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.NativeRenderer">
+            <summary>
+            The native video player renderer.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.StatePropertyKey">
+            <summary>
+            The is state property key.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.StateProperty">
+            <summary>
+            Identifies the State bindable property.
+            </summary>
+            
+            <remarks>
+            This bindable property is readonly.
+            </remarks>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.State">
+            <summary>
+            The current state of the video player.
+            </summary>
+            <value>
+            A <see cref="T:PlayerState"/> indicating the current state of the video player. The default is PlayerState.Idle.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.CurrentTimePropertyKey">
+            <summary>
+            The CurrentTime property key.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.CurrentTimeProperty">
+            <summary>
+            Identifies the CurrentTime bindable property.
+            </summary>
+            
+            <remarks>
+            This bindable property is readonly.
+            </remarks>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.CurrentTime">
+            <summary>
+            The current time of the video player.
+            </summary>
+            <value>
+            A <see cref="T:TimeSpan"/> representing the current position in the playback timeline.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.IsLoadingPropertyKey">
+            <summary>
+            The is loading property key
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.IsLoadingProperty">
+            <summary>
+            Identifies the IsLoading bindable property.
+            </summary>
+            
+            <remarks>
+            This bindable property is readonly.
+            </remarks>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.IsLoading">
+            <summary>
+            The current loading status of the video. Useful for determining when buffering cccurs.
+            </summary>
+            
+            <value>
+            A <see cref="T:System.Boolean"/> indicating if the video is loading. Default is false.
+            </value>
+            
+            <remarks>
+            
+            <para>
+            The following example illustrates running a  <see cref="T:Xamarin.Forms.ActivityIndicator"/> to indicate that the video is loading:
+            </para>
+            
+            <example>
+            
+            <code lang="C#">
+            <![CDATA[
+            var videoPlayer = new VideoPlayer {
+              Source = new VideoLoader {
+                Uri = new Uri ("http://video-js.zencoder.com/oceans-clip.mp4")
+              },
+              HeightRequest = 300
+            };
+            
+            var indicator = new ActivityIndicator {Color = new Color (.5),};
+            indicator.SetBinding (ActivityIndicator.IsRunningProperty, "IsLoading");
+            indicator.BindingContext = videoPlayer;]]>
+            </code>
+            
+            </example>
+            
+            </remarks>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.AutoPlayProperty">
+            <summary>
+            The automatic play property
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.AutoPlay">
+            <summary>
+            Specifies that the video will start playing as soon as it is ready.
+            </summary>
+            <value>
+              <c>true</c> plays the video automatically when it starts up; otherwise, <c>false</c>. Default is <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.DisplayControlsProperty">
+            <summary>
+            The display controls property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.DisplayControls">
+            <summary>
+            Specifies that video controls should be displayed (such as a play and pause button).
+            </summary>
+            <value>
+              <c>true</c> if video controls should be displayed; otherwise, <c>false</c>. Default is <c>true</c>.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.FillModeProperty">
+            <summary>
+            The FillMode bindable property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.FillMode">
+            <summary>
+            Defines how the video content is displayed within the player layer's bounds.
+            </summary>
+            <value>
+            The video gravity. Default is ResizeAspect.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.TimeElapsedIntervalProperty">
+            <summary>
+            The TimeElapsedIntervalProperty bindable property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.TimeElapsedInterval">
+            <summary>
+            The time interval in seconds for the TimeElapsed event firing to occur.
+            Default is 0 seconds which means TimeElapsed will not fire.
+            If you use TimeElapsed, it is recommended to set this value to fire less frequently for better peroformance.
+            </summary>
+            <value>
+            The TimeElapsed event firing interval.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.RepeatProperty">
+            <summary>
+            The RepeatProperty bindable property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.Repeat">
+            <summary>
+            Repeat video when playback is complete. Default is false.
+            </summary>
+            <value>
+            The TimeElapsed event firing interval.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.VolumeProperty">
+            <summary>
+            The Volume bindable property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.Volume">
+            <summary>
+            The volume level of the current media stream.
+            If this property is not set, it defaults to the current media volume setting of the mobile device.
+            Valid values are 0 (muted) - 100 (max volume)
+            </summary>
+            <value>
+            The volume level percentage.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.SourceProperty">
+            <summary>
+            The source bindable property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.Source">
+            <summary>
+            A local file path or remote URL to a video file.
+            </summary>
+            <value>
+            The path where this video file is located.
+            </value>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.Playing">
+            <summary>
+            Notification the playback rate has changed to a non-zero rate.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnPlaying(Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs)">
+            <summary>
+            Raises the <see cref="E:Playing" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.Paused">
+            <summary>
+            Notification the playback rate has changed to zero.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnPaused(Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs)">
+            <summary>
+            Raises the <see cref="E:Pause" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.TimeElapsed">
+            <summary>
+            Notification the specified number of seconds configured in the `VideoPlayer.TimeElapsedInterval` have passed.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnTimeElapsed(Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs)">
+            <summary>
+            Raises the <see cref="E:TimeElapsed" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.Completed">
+            <summary>
+            Notification fires when the video player has reached the end of the playback stream.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnCompleted(Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs)">
+            <summary>
+            Raises the <see cref="E:Completed" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.Failed">
+            <summary>
+            Notification fires when the video player experiences an error during playback or during initialization of the media file.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnFailed(Octane.Xam.VideoPlayer.Events.VideoPlayerErrorEventArgs)">
+            <summary>
+            Raises the <see cref="E:Failed" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoPlayer.PlayerStateChanged">
+            <summary>
+            Event notification fires when the video player's internal state machine changes state.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.OnPlayerStateChanged(Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:PlayerStateChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Octane.Xam.VideoPlayer.Events.VideoPlayerStateChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.PlayCommandProperty">
+            <summary>
+            The play command property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.PlayCommand">
+            <summary>
+            Begins video playback.
+            </summary>
+            <value>
+            The play command.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.PauseCommandProperty">
+            <summary>
+            The pause command property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.PauseCommand">
+            <summary>
+            Pauses video playback.
+            </summary>
+            <value>
+            The pause command.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoPlayer.SeekCommandProperty">
+            <summary>
+            The seek command property.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoPlayer.SeekCommand">
+            <summary>
+            This command seeks a specific number of seconds forward or backward in the playback stream.
+            For example, a command parameter of -3 seeks 3 seconds back.
+            </summary>
+            <value>
+            The seek command.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.VideoPlayer"/> class.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.VideoPlayer" /> class.
+            </summary>
+            <param name="source">The video source.</param>
+            <param name="autoPlay">Specifies that the video will start playing as soon as it is ready.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.#ctor(Octane.Xam.VideoPlayer.VideoSource,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.VideoPlayer"/> class.
+            </summary>
+            <param name="source">The video source.</param>
+            <param name="autoPlay">Specifies that the video will start playing as soon as it is ready.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.Play">
+            <summary>
+            Begins video playback. 
+            Only functions if the video player has entered a valid state (i.e. prepared).
+            It may be best to hook into the <c>PlayerStateChanged</c> event to listen for the prepared or paused state before calling this method directly.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.Pause">
+            <summary>
+            Pauses video playback.
+            Only functions if the video player has a non-zero playback rate.
+            It may be best to hook into the <c>PlayerStateChanged</c> event to listen for the playing or prepared state before calling this method directly.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoPlayer.Seek(System.Int32)">
+            <summary>
+            Seeks a specific number of seconds forward or backward in the playback stream.
+            For example, a time of -3 seeks 3 seconds back.
+            It may be best to hook into the <c>PlayerStateChanged</c> event to listen for the prepared state before calling this method directly.
+            </summary>
+            <param name="time">The time in seconds to seek forward or backward.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicense">
+            <summary>
+            Licensing information related to the video player.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicense.LicenseType">
+            <summary>
+            The license type used by this video player instance.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicense.Initialize(System.String)">
+            <summary>
+            Validates and initializes the license.
+            </summary>
+            <param name="licenseKey">The license key.</param>
+            <exception cref="T:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException">The specified license key is invalid.
+            This version is not eligibile for upgrades based on your license. You may only receive upgrades one year from your purchase date. Please purchase a fresh license to get additional updates or downgrade to a previous version.</exception>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException">
+            <summary>
+            Exception raised when using a feature that violates licensing rights of the video player component.
+            </summary>
+            <seealso cref="T:System.Exception" />
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException"/> class.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Licensing.VideoPlayerLicenseException" /> class.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.VideoSource">
+            <summary>
+            Loads videos from files or the web.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoSource._syncHandle">
+            <summary>
+            The synchronize handle
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoSource._cancellationTokenSource">
+            <summary>
+            The cancellation token source
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.VideoSource._completionSource">
+            <summary>
+            The completion source
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoSource.CancellationTokenSource">
+            <summary>
+            Gets the CancellationTokenSource.
+            </summary>
+            <remarks>
+            Used by inheritors to implement cancellable loads.
+            </remarks>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.VideoSource.IsLoading">
+            <summary>
+            Determines whether a video is loading.
+            </summary>
+            <value>
+              <c>true</c> if this instance is loading; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.VideoSource.SourceChanged">
+            <summary>
+            Occurs when the video source changes.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.VideoSource" /> class.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.op_Implicit(System.String)~Octane.Xam.VideoPlayer.VideoSource">
+            <summary>
+            Allows implicit casting from a string that represents an absolute URI.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.op_Implicit(System.Uri)~Octane.Xam.VideoPlayer.VideoSource">
+            <summary>
+            Allows implicit casting from <see cref="T:System.Uri" /> objects that were created with an absolute URI.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns>
+            The result of the operator.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.OnSourceChanged">
+            <summary>
+            Called by inheritors to indicate that the source changed.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.FromFile(System.String)">
+            <summary>
+            Returns a new <see cref="T:Xamarin.Forms.FileVideoSource"/> that reads from <paramref name="file"/>.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.FromStream(System.Func{System.IO.Stream},System.String)">
+            <summary>
+            Returns a new <see cref="T:Xamarin.Forms.StreamVideoSource" /> that reads from <paramref name="stream" />.
+            </summary>
+            <param name="stream">The lambda responsible for extracting the stream.</param>
+            <param name="format">The stream container format (i.e. "mp4", "webm", etc.)</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Octane.Xam.VideoPlayer.VideoSource.FromResource(System.String,System.Reflection.Assembly)" -->
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.FromUri(System.String)">
+            <summary>
+            Returns a new <see cref="T:Xamarin.Forms.UriVideoSource" /> that reads from <paramref name="uri" />.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">uri is relative</exception>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.FromUri(System.Uri)">
+            <summary>
+            Returns a new <see cref="T:Xamarin.Forms.UriVideoSource" /> that reads from <paramref name="uri" />.
+            </summary>
+            <param name="uri">The URI.</param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">uri is relative</exception>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.OnLoadingStarted">
+            <summary>
+            Called by inheritors to indicate the beginning of a loading operation.
+            </summary>
+            
+            <remarks>
+            OnLoadingCompleted should follow a OnLoadingStarted.
+            </remarks>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.OnLoadingCompleted(System.Boolean)">
+            <param name="cancelled">A bool indicating if the source was cancelled.</param>
+            <summary>
+            Called by inheritors to indicate the end of the loading of the source.
+            </summary>
+            
+            <remarks>
+            OnLoadingCompleted should follow a OnLoadingStarted.
+            </remarks>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.Cancel">
+            <summary>
+            Request a cancel of the VideoSource loading.
+            </summary>
+            <remarks>
+            Calling Cancel() multiple times will throw an exception.
+            </remarks>
+            <returns>
+            An awaitable Task. The result of the Task indicates if the Task was successfully cancelled.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSource.Equals(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Determines if two video sources are equivalent.
+            </summary>
+            <param name="other">The other video source.</param>
+            <returns>True if the video sources are equal, false otherwise.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.VideoSourceConverter.CanConvertFrom(System.Type)">
+            <summary>
+            Determines whether this instance [can convert from] the specified source type.
+            </summary>
+            <param name="sourceType">Type of the source.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

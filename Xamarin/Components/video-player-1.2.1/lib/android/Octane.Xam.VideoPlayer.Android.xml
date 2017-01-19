@@ -1,0 +1,514 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Octane.Xam.VideoPlayer.Android</name>
+    </assembly>
+    <members>
+        <member name="T:Octane.Xam.VideoPlayer.Android.Constants.MediaPlayerStatus">
+            <summary>
+            Represents the states of an Android MediaPlayer.
+            See: http://developer.android.com/images/mediaplayer_state_diagram.gif
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger">
+            <summary>
+            Platform specific logging implementation.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger._logEntryPrefix">
+            <summary>
+            The prefix used to denote the log entry subject.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger.Info(System.String)">
+            <summary>
+            Informations the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger.Warn(System.String)">
+            <summary>
+            Warns the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger.Error(System.String)">
+            <summary>
+            Errors the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger.Error(System.Exception)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Diagnostics.AndroidLogger.Error(System.Exception,System.String)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.ExtensionMethods.ContextExtensions.GetHeightInPixels(Android.Content.Context)">
+            <summary>
+            Gets the height of the screen in pixels.
+            </summary>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.ExtensionMethods.ContextExtensions.GetWidthInPixels(Android.Content.Context)">
+            <summary>
+            Gets the width of the screen in pixels.
+            </summary>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.ExtensionMethods.ContextExtensions.GetHeighInDp(Android.Content.Context)">
+            <summary>
+            Gets the height of the screen in dp.
+            </summary>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.ExtensionMethods.ContextExtensions.GetWidthInDp(Android.Content.Context)">
+            <summary>
+            Gets the width of the screen in dp.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Android.FormsVideoPlayer">
+            <summary>
+            Initializes the VideoPlayer component for use with Xamarin Forms.
+            Make sure to call <c>FormsVideoPlayer.Init();</c> after the <c>Forms.Init()</c> call in each project of your solution.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.FormsVideoPlayer.IsInitialized">
+            <summary>
+            Indicates whether the VideoPlayer component is initialized.
+            </summary>
+            <value>
+            <c>true</c> if this instance is initialized; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.FormsVideoPlayer.Init(System.String)">
+            <summary>
+            Initializes the VideoPlayer component for use with Xamarin Forms.
+            This method should be invoked after the Forms.Init() call during application startup.
+            </summary>
+            <param name="licenseKey">The license key.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Android.PlatformFeatures">
+            <summary>
+            Platform native methods needed in cross-platform code.
+            </summary>
+            <seealso cref="T:Octane.Xam.VideoPlayer.Interfaces.IPlatformFeatures" />
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.PlatformFeatures.PackageName">
+            <summary>
+            Gets the name of the package.
+            </summary>
+            <value>
+            The name of the package.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.PlatformFeatures.HashSha1(System.String)">
+            <summary>
+            Hashes the specified value using SHA-1.
+            </summary>
+            <param name="value">The value to hash.</param>
+            <returns>
+            A base-64 encoded SHA-1 hash.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.PlatformFeatures.Exit">
+            <summary>
+            Exits the mobile application.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer">
+            <summary>
+            A custom renderer for the native platform video player.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer._currentPositionTimer">
+            <summary>
+            Tracks the playback time so we can update CurrentTime in the Xamarin Forms video player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.Play">
+            <summary>
+            Plays the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CanPlay">
+            <summary>
+            Determines if the video player instance can play.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can play; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.Pause">
+            <summary>
+            Pauses the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CanPause">
+            <summary>
+            Determines if the video player instance can pause.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can pause; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.Stop">
+            <summary>
+            Stops the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CanStop">
+            <summary>
+            Determines if the video player instance can stop.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.Seek(System.Int32)">
+            <summary>
+            Seeks a specific number of seconds into the playback stream.
+            </summary>
+            <param name="time">The time in seconds.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CanSeek(System.Int32)">
+            <summary>
+            Determines if the video player instance can seek.
+            </summary>
+            <param name="time">The time in seconds.</param>
+            <returns></returns>
+            <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.OnElementChanged(Xamarin.Forms.Platform.Android.ElementChangedEventArgs{Octane.Xam.VideoPlayer.VideoPlayer})">
+            <summary>
+            Raises the <see cref="E:ElementChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Xamarin.Forms.Platform.Android.ElementChangedEventArgs`1"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.OnElementPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Called when [element property changed].
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.RegisterEvents">
+            <summary>
+            Registers this renderer with native events.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.OnPrepared(System.Object,System.EventArgs)">
+            <summary>
+            Called when the video player has been prepared for playback.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="eventArgs">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateDisplayControls">
+            <summary>
+            Updates the display controls property on the native player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateVolume">
+            <summary>
+            Updates the volume level.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateSource(Octane.Xam.VideoPlayer.VideoPlayer)">
+            <summary>
+            Updates the video source property on the native player.
+            </summary>
+            <param name="oldElement">The old element.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateTimeElapsedInterval">
+            <summary>
+            Updates the time elapsed interval of the video player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateFillMode">
+            <summary>
+            Updates the fill mode property on the native player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateRepeat">
+            <summary>
+            Updates the repeat property on the native player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.UpdateVisibility">
+            <summary>
+            Updates the visibility of the video player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CreateVideoPlayerEventArgs">
+            <summary>
+            Creates the video player event arguments.
+            </summary>
+            <returns>VideoPlayerEventArgs with information populated.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CreateVideoPlayerStateChangedEventArgs(Octane.Xam.VideoPlayer.Constants.PlayerState)">
+            <summary>
+            Creates the video player state changed event arguments.
+            </summary>
+            <param name="state">The current state.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Renderers.VideoPlayerRenderer.CreateVideoPlayerErrorEventArgs(Android.Media.MediaError)">
+            <summary>
+            Creates the video player error event arguments.
+            </summary>
+            <param name="errorCode">The error code.</param>
+            <param name="extra">The extra.</param>
+            <returns>
+            VideoPlayerErrorEventArgs with information populated.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.SourceHandlers.FileVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.SourceHandlers.StreamVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.SourceHandlers.StreamVideoSourceHandler.GetFileName(System.IO.Stream,System.String)">
+            <summary>
+            Computes a file name based on a stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.SourceHandlers.UriVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.SourceHandlers.VideoSourceHandler.Create(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Creates a source handler capable of loading the video resource.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <returns>A compatible source handler.</returns>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Views.View.VideoViewSavedState.CurrentPosition">
+            <summary>
+            Gets or sets the current position.
+            </summary>
+            <value>
+            The current position.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Views.View.VideoViewSavedState.WriteToParcel(Android.OS.Parcel,Android.OS.ParcelableWriteFlags)">
+            <summary>
+            Writes data to the parcel.
+            </summary>
+            <param name="dest"></param>
+            <param name="flags"></param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.Android.Widget.VideoView">
+            <summary>
+            Displays a video file.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Player">
+            <summary>
+            The platform specific media player object.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Widget.VideoView.MediaController">
+            <summary>
+            The media controller.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Widget.VideoView.TimeElapsedInterval">
+            <summary>
+            Gets or sets the time elapsed interval.
+            </summary>
+            <value>
+            The time elapsed interval.
+            </value>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Status">
+            <summary>
+            Gets the state of the MediaPlayer.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.Android.Widget.VideoView.FillMode">
+            <summary>
+            Gets or sets the video scaling fill mode of the player on the view surface.
+            </summary>
+            <value>
+            The fill mode.
+            </value>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Android.Widget.VideoView._timer">
+            <summary>
+            The timer used to control time elapsed event firings.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Android.Widget.VideoView._timeElapsedInterval">
+            <summary>
+            The time elapsed interval.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.Android.Widget.VideoView._fillMode">
+            <summary>
+            Gets or sets the video scaling fill mode of the player on the view surface.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.#ctor(System.IntPtr,Android.Runtime.JniHandleOwnership)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Android.Widget.VideoView"/> class.
+            </summary>
+            <param name="javaReference">The java reference.</param>
+            <param name="transfer">The transfer.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.#ctor(Android.Content.Context)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Android.Widget.VideoView"/> class.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.#ctor(Android.Content.Context,Android.Util.IAttributeSet)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Android.Widget.VideoView"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="attrs">The attrs.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.#ctor(Android.Content.Context,Android.Util.IAttributeSet,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Octane.Xam.VideoPlayer.Android.Widget.VideoView"/> class.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="attrs">The attrs.</param>
+            <param name="defStyle">The definition style.</param>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Started">
+            <summary>
+            Event notification fires when the video player's play button has been pressed.
+            </summary>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Paused">
+            <summary>
+            Event notification fires when the video player's play button has been pressed.
+            </summary>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Stopped">
+            <summary>
+            Event notification fires when the video player's stop button has been pressed.
+            </summary>
+        </member>
+        <member name="E:Octane.Xam.VideoPlayer.Android.Widget.VideoView.TimeElapsed">
+            <summary>
+            Event notification fires when the video player's pause or stop button has been pressed.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Init">
+            <summary>
+            Initializes this VideoView instance.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.OnPrepared(System.Object,System.EventArgs)">
+            <summary>
+            Called when the video is prepared for playback.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.OnError(System.Object,Android.Media.MediaPlayer.ErrorEventArgs)">
+            <summary>
+            Called when the video player fails.
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="errorEventArgs">The <see cref="T:Android.Media.MediaPlayer.ErrorEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.OnCompletion(System.Object,System.EventArgs)">
+            <summary>
+            Called when [completion].
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.SetMediaController(Android.Widget.MediaController)">
+            <summary>
+            Sets the media controller.
+            </summary>
+            <param name="controller">The controller.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.SetVideoPath(System.String)">
+            <summary>
+            Sets the video path.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.SetVideoURI(Android.Net.Uri)">
+            <summary>
+            Sets the video URI.
+            </summary>
+            <param name="uri">The URI.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.SetVideoURI(Android.Net.Uri,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Sets the video URI.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="headers">The headers.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Start">
+            <summary>
+            Starts this instance.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.StopPlayback">
+            <summary>
+            Stops the playback.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Pause">
+            <summary>
+            Pauses the video playback.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.OnConfigurationChanged(Android.Content.Res.Configuration)">
+            <summary>
+            Called when the current configuration of the resources being used
+            by the application have changed.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.UpdateVideoSize">
+            <summary>
+            Updates the size of the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.Android.Widget.VideoView.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+    </members>
+</doc>

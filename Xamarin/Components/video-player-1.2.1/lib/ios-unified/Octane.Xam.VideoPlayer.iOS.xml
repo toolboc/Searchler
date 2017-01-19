@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Octane.Xam.VideoPlayer.iOS</name>
+    </assembly>
+    <members>
+        <member name="T:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger">
+            <summary>
+            Platform specific logging implementation.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger._logEntryPrefix">
+            <summary>
+            The prefix used to denote the log entry subject.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger.Info(System.String)">
+            <summary>
+            Informations the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger.Warn(System.String)">
+            <summary>
+            Warns the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger.Error(System.String)">
+            <summary>
+            Errors the specified message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger.Error(System.Exception)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Diagnostics.iOSLogger.Error(System.Exception,System.String)">
+            <summary>
+            Errors the specified exception.
+            </summary>
+            <param name="exception">The exception.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.iOS.FormsVideoPlayer">
+            <summary>
+            Initializes the VideoPlayer component for use with Xamarin Forms.
+            Make sure to call <c>FormsVideoPlayer.Init();</c> after the <c>Forms.Init()</c> call in each project of your solution.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.iOS.FormsVideoPlayer.IsInitialized">
+            <summary>
+            Indicates whether the VideoPlayer component is initialized.
+            </summary>
+            <value>
+            <c>true</c> if this instance is initialized; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.FormsVideoPlayer.Init(System.String)">
+            <summary>
+            Initializes the VideoPlayer component for use with Xamarin Forms.
+            This method should be invoked after the Forms.Init() call during application startup.
+            </summary>
+            <param name="licenseKey">The license key.</param>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.iOS.PlatformFeatures">
+            <summary>
+            Platform native methods needed in cross-platform code.
+            </summary>
+            <seealso cref="T:Octane.Xam.VideoPlayer.Interfaces.IPlatformFeatures" />
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.iOS.PlatformFeatures.PackageName">
+            <summary>
+            Gets the name of the package.
+            </summary>
+            <value>
+            The name of the package.
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.PlatformFeatures.HashSha1(System.String)">
+            <summary>
+            Hashes the specified value using SHA-1.
+            </summary>
+            <param name="value">The value to hash.</param>
+            <returns>
+            A base-64 encoded SHA-1 hash.
+            </returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.PlatformFeatures.Exit">
+            <summary>
+            Exits the mobile application.
+            </summary>
+        </member>
+        <member name="T:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer">
+            <summary>
+            A custom renderer for the native platform video player.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer._periodicTimeOberserver">
+            <summary>
+            The periodic time oberserver.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer._currentTimeObserver">
+            <summary>
+            The current time observer.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer._didPlayToEndTimeNotificationObserver">
+            <summary>
+            The did play to end time notification observer.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer._isDisposed">
+            <summary>
+            Determines if this instance has been disposed.
+            </summary>
+        </member>
+        <member name="F:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer._playerControl">
+            <summary>
+            The platform specific media player object.
+            </summary>
+        </member>
+        <member name="P:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.PlayerControl">
+            <summary>
+            The platform specific media player object.
+            </summary>
+            <value>
+            The AVPlayer controller
+            </value>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.Play">
+            <summary>
+            Plays the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CanPlay">
+            <summary>
+            Determines if the video player instance can play.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can play; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.Pause">
+            <summary>
+            Pauses the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CanPause">
+            <summary>
+            Determines if the video player instance can pause.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can pause; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.Stop">
+            <summary>
+            Stops the video.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CanStop">
+            <summary>
+            Determines if the video player instance can stop.
+            </summary>
+            <returns></returns>
+            <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.Seek(System.Int32)">
+            <summary>
+            Seeks a specific number of seconds into the playback stream.
+            </summary>
+            <param name="seekTime">The seek time.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CanSeek(System.Int32)">
+            <summary>
+            Determines if the video player instance can seek.
+            </summary>
+            <param name="time">The time in seconds.</param>
+            <returns></returns>
+            <c>true</c> if this instance can stop; otherwise, <c>false</c>.
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.OnElementChanged(Xamarin.Forms.Platform.iOS.ElementChangedEventArgs{Octane.Xam.VideoPlayer.VideoPlayer})">
+            <summary>
+            Raises the <see cref="E:ElementChanged" /> event.
+            </summary>
+            <param name="e">The <see cref="T:Xamarin.Forms.Platform.iOS.ElementChangedEventArgs`1"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.OnElementPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Called when [element property changed].
+            </summary>
+            <param name="sender">The sender.</param>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.RegisterEvents">
+            <summary>
+            Registers this renderer with native events.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.DidPlayToEndTimeNotification(Foundation.NSNotification)">
+            <summary>
+            Event handling for the play to end time notification.
+            </summary>
+            <param name="obj">The notification object.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UnRegisterEvents">
+            <summary>
+            Uns the register events.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.ObserveValue(Foundation.NSString,Foundation.NSObject,Foundation.NSDictionary,System.IntPtr)">
+            <summary>
+            Indicates that the value at the specified keyPath relative to this object has changed.
+            </summary>
+            <param name="keyPath">Key-path to use to perform the value lookup.   The keypath consists of a series of lowercase ASCII-strings with no spaces in them separated by dot characters.</param>
+            <param name="ofObject">The object.</param>
+            <param name="change">A dictionary that describes the changes that have been made to the value of the property at the key path keyPath relative to object. Entries are described in Change Dictionary Keys.</param>
+            <param name="context">The value that was provided when the receiver was registered to receive key-value observation notifications.</param>
+            <remarks>
+            This method is invoked if you have registered an observer using the <see cref="M:Foundation.NSObject.AddObserver" /> method
+            </remarks>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateDisplayControls">
+            <summary>
+            Updates the display controls property on the native player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateVolume">
+            <summary>
+            Updates the volume level.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateSource(Octane.Xam.VideoPlayer.VideoPlayer)">
+            <summary>
+            Updates the video source property on the native player.
+            </summary>
+            <param name="oldElement">The old element.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateTimeElapsedInterval">
+            <summary>
+            Updates the time elapsed interval of the video player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateFillMode">
+            <summary>
+            Updates the fill mode property on the native player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.UpdateVisibility">
+            <summary>
+            Updates the visibility of the video player.
+            </summary>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CreateVideoPlayerEventArgs">
+            <summary>
+            Creates the video player event arguments.
+            </summary>
+            <returns>VideoPlayerEventArgs with information populated.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CreateVideoPlayerStateChangedEventArgs(Octane.Xam.VideoPlayer.Constants.PlayerState)">
+            <summary>
+            Creates the video player state changed event arguments.
+            </summary>
+            <param name="state">The current state.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.CreateVideoPlayerErrorEventArgs">
+            <summary>
+            Creates the video player error event arguments.
+            </summary>
+            <returns>VideoPlayerErrorEventArgs with information populated.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.Renderers.VideoPlayerRenderer.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.SourceHandlers.VideoSourceHandler.Create(Octane.Xam.VideoPlayer.VideoSource)">
+            <summary>
+            Creates a source handler capable of loading the video resource.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <returns>A compatible source handler.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.SourceHandlers.UriVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.SourceHandlers.FileVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.SourceHandlers.StreamVideoSourceHandler.LoadVideoAsync(Octane.Xam.VideoPlayer.VideoSource,System.Threading.CancellationToken)">
+            <summary>
+            Loads the video from the specified source.
+            </summary>
+            <param name="source">The source of the video file.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+            <returns>The path to the video file.</returns>
+        </member>
+        <member name="M:Octane.Xam.VideoPlayer.iOS.SourceHandlers.StreamVideoSourceHandler.GetFileName(System.IO.Stream,System.String)">
+            <summary>
+            Computes a file name based on a stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <param name="format">The format.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
