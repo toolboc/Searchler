@@ -195,7 +195,11 @@
     <EmbeddedResource Include="Videos\video.mp4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\..\..\..\Github\YoutubeExtractor\YoutubeExtractor\YoutubeExtractor\YoutubeExtractor_Portable.csproj">
+    <ProjectReference Include="..\..\MusicBrainz\Hqub.MusicBrainz\Hqub.MusicBrainz.API.Portable\Hqub.MusicBrainz.API.Portable.csproj">
+      <Project>{08d4701e-168c-43d1-9c6e-34b079cfd934}</Project>
+      <Name>Hqub.MusicBrainz.API.Portable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\YoutubeExtractor\YoutubeExtractor\YoutubeExtractor\YoutubeExtractor_Portable.csproj">
       <Project>{1bb4cf4d-3617-4a23-b51a-da7711e6f8eb}</Project>
       <Name>YoutubeExtractor_Portable</Name>
     </ProjectReference>
