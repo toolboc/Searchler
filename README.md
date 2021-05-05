@@ -1,5 +1,5 @@
 # Searchler #
-A port of Searchler for [Windows 8.0](https://www.microsoft.com/en-us/store/p/searchler/9wzdncrdfp5k) / [Windows Phone 8.0](https://www.microsoft.com/en-us/store/p/searchler-music-video-search/9wzdncrcwm3z) to Xamarin.Forms!
+A port of Searchler for [Windows 8.0](https://www.microsoft.com/store/p/searchler/9wzdncrdfp5k?WT.mc_id=iot-0000-pdecarlo) / [Windows Phone 8.0](https://www.microsoft.com/store/p/searchler-music-video-search/9wzdncrcwm3z?WT.mc_id=iot-0000-pdecarlo) to Xamarin.Forms!
 
 ![Demo](http://i.imgur.com/Ek2L28y.png)
 
@@ -17,8 +17,8 @@ Also supports hashtags i.e - #90s #alternative OR #French #progress #rock
 Building from source requires the following prerequisites:
 
 
-- [Visual Studio Community Edition](https://www.microsoft.com/en-us/download/details.aspx?id=48146)
-- [Xamarin for Visual Studio](https://www.visualstudio.com/xamarin/)
+- [Visual Studio Community Edition](https://www.microsoft.com/download/details.aspx?id=48146&WT.mc_id=iot-0000-pdecarlo)
+- [Xamarin for Visual Studio](https://www.visualstudio.com/xamarin/?WT.mc_id=iot-0000-pdecarlo)
 
 
 
